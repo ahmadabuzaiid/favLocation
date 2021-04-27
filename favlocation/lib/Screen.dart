@@ -123,9 +123,7 @@ class Screen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add_circle),
-          onPressed: () => Navigator.push(
-              context, MaterialPageRoute(builder: (context) => PrevCreate()))),
+          child: Icon(Icons.add_circle), onPressed: () => null),
     );
   }
 }
