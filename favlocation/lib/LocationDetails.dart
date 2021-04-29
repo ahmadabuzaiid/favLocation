@@ -4,23 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 int tmp;
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LocationDetails(tmp),
-    );
-  }
-}
-
 class LocationDetails extends StatelessWidget {
   LocationDetails(int id_tmp) {
     tmp = id_tmp;
