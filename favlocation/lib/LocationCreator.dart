@@ -9,28 +9,18 @@ String tmp_description;
 String tmp_imageUrl;
 String tmp_locationUrl;
 
-class PrevCreate extends StatelessWidget {
+class LocationCreator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Text("Create New Location"),
         ),
-        body: LocationCreator());
+        body: LocationCreatorForm());
   }
 }
 
-class LocationCreator extends StatefulWidget {
-  @override
-  LocationCreatorForm createState() {
-    return LocationCreatorForm();
-  }
-}
-
-class LocationCreatorForm extends State<LocationCreator> {
-  get child => null;
-
-  @override
+class LocationCreatorForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: _validatform,

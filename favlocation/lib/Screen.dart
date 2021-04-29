@@ -1,5 +1,5 @@
 import 'package:favlocation/LocationDetails.dart';
-import 'package:favlocation/PrevCreate.dart';
+import 'package:favlocation/LocationCreator.dart';
 import 'package:favlocation/data/Locations.dart';
 import 'package:flutter/material.dart';
 
@@ -93,37 +93,35 @@ class Screen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
             child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(184, 212, 225, 1.0),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 6.0, horizontal: 6.0),
-                      child: Image.network(
-                          _list.listobj.elementAt(i).imageUrl.toString()),
-                    ),
-                    Center(
-                        child:
-                            Text(_list.listobj.elementAt(i).name.toString())),
-                    Center(
-                        child:
-                            Text(_list.listobj.elementAt(i).theme.toString())),
-                  ],
-                ),
-                onPressed: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  LocationDetials(_list.listobj.elementAt(i))))
-                    }),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(184, 212, 225, 1.0),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 6.0, horizontal: 6.0),
+                    child: Image.network(
+                        _list.listobj.elementAt(i).imageUrl.toString()),
+                  ),
+                  Center(
+                      child: Text(_list.listobj.elementAt(i).name.toString())),
+                  Center(
+                      child: Text(_list.listobj.elementAt(i).theme.toString())),
+                ],
+              ),
+              onPressed: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LocationDetails(i))),
+              },
+            ),
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add_circle), onPressed: () => null),
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.add_circle), onPressed: null),
     );
   }
 }
