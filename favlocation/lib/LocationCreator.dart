@@ -1,3 +1,4 @@
+import 'package:favlocation/firestore_Method.dart';
 import 'package:flutter/material.dart';
 import 'models/Location.dart';
 import 'Screen.dart';
@@ -121,13 +122,9 @@ class LocationCreatorForm extends StatelessWidget {
               child: Icon(Icons.check_circle),
               onPressed: () {
                 if (_validatform.currentState.validate()) {
-                  setList(new Location(
-                      id: getList().listobj.length + 1,
-                      name: tmp_name,
-                      theme: tmp_theme,
-                      description: tmp_description,
-                      imageUrl: tmp_imageUrl,
-                      locationUrl: tmp_locationUrl));
+                  locationSetup(tmp_name, tmp_theme, tmp_description,
+                      tmp_imageUrl, tmp_locationUrl);
+
                   Navigator.pop(context);
                   Navigator.pop(context);
                   Navigator.push(context,

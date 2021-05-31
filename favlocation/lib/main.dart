@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'Screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -26,12 +29,7 @@ class MyHomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Fav Location",
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Fav Location"),
-        ),
-        body: Login(),
-      ),
+      home: MyScreen(),
     );
   }
 }

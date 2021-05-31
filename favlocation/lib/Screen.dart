@@ -1,28 +1,18 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favlocation/LocationDetails.dart';
 import 'package:favlocation/LocationCreator.dart';
-import 'package:favlocation/data/Locations.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 final _formKey_1 = GlobalKey<FormState>();
 final _formKey_2 = GlobalKey<FormState>();
-LocationsAll _list = new LocationsAll();
+CollectionReference _location =
+    FirebaseFirestore.instance.collection('Locations');
 var _user_login;
 var _password_login;
 var _user_signup;
 var _password_signup;
 var _password_temp;
 var _temp_var;
-
-FirebaseAuth auth = FirebaseAuth.instance;
-
-LocationsAll getList() {
-  return _list;
-}
-
-void setList(tmp) {
-  _list.listobj.add(tmp);
-}
 
 class Login extends StatefulWidget {
   @override
@@ -246,38 +236,60 @@ class Screen extends State<MyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_user_login),
+        title: Text("Fav Location"),
       ),
-      body: ListView.builder(
-        itemCount: _list.listobj.length,
-        itemBuilder: (BuildContext context, int i) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3.0, horizontal: 3.0),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromRGBO(184, 212, 225, 1.0),
+      body: StreamBuilder(
+        stream: _location.snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return ListView(
+            children: <Widget>[
+              Column(
+                children: snapshot.data.docs.map((result) {
+                  return Container(
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3.0, horizontal: 3.0),
+                          child: ElevatedButton(
+                            onPressed: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          LocationDetails(result))),
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color.fromRGBO(184, 212, 225, 1.0),
+                            ),
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 6.0, horizontal: 6.0),
+                                  child: Image.network(
+                                      result.get('imageUrl').toString()),
+                                ),
+                                Center(
+                                    child: Text(result.get('name').toString())),
+                                Center(
+                                    child:
+                                        Text(result.get('theme').toString())),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
               ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 6.0, horizontal: 6.0),
-                    child: Image.network(
-                        _list.listobj.elementAt(i).imageUrl.toString()),
-                  ),
-                  Center(
-                      child: Text(_list.listobj.elementAt(i).name.toString())),
-                  Center(
-                      child: Text(_list.listobj.elementAt(i).theme.toString())),
-                ],
-              ),
-              onPressed: () => {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LocationDetails(i))),
-              },
-            ),
+            ],
           );
         },
       ),

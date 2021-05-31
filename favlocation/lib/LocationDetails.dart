@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:favlocation/Screen.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-int tmp;
+QueryDocumentSnapshot<Object> tmp;
 
 class LocationDetails extends StatelessWidget {
-  LocationDetails(int id_tmp) {
-    tmp = id_tmp;
+  LocationDetails(QueryDocumentSnapshot<Object> tmp_doc) {
+    tmp = tmp_doc;
   }
 
   @override
@@ -20,29 +21,26 @@ class LocationDetails extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Text(getList().listobj.elementAt(tmp).name.toString()),
+              child: Text(tmp.get('name').toString()),
             ),
           ),
           Center(
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
-              child: Image.network(
-                  getList().listobj.elementAt(tmp).imageUrl.toString()),
+              child: Image.network(tmp.get('imageUrl').toString()),
             ),
           ),
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child:
-                  Text(getList().listobj.elementAt(tmp).description.toString()),
+              child: Text(tmp.get('description').toString()),
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            launch(getList().listobj.elementAt(tmp).locationUrl.toString()),
+        onPressed: () => launch(tmp.get('locationUrl').toString()),
         child: Icon(Icons.map_rounded),
       ),
     );
