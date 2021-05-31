@@ -23,17 +23,14 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Fav Location"),
-      ),
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Image.asset('assests/download.jfif'),
-            MyCustomForm(),
-          ],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Fav Location",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Fav Location"),
         ),
+        body: Login(),
       ),
     );
   }
