@@ -20,11 +20,6 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
-flutter_icons:
-  image_path: "assests/download.png"
-  android: true
-  ios: true  
-
 dependencies:
   url_launcher: ^5.4.0
   flutter:
@@ -35,7 +30,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   cloud_firestore: ^2.2.0
   firebase_auth: ^1.2.0
-  flutter_launcher_icons: ^0.7.4
 
 dev_dependencies:
   flutter_test:
