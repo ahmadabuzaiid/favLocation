@@ -18,28 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Fav Location'),
-        ),
-        body: MyScreen(),
-      ),
+      home: MyScreen(),
     );
   }
 }
-
-// class MyHomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "Fav Location",
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text('Fav Location'),
-//         ),
-//         body: MyScreen(),
-//       ),
-//     );
-//   }
-// }
