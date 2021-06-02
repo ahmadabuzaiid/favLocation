@@ -125,9 +125,7 @@ class LocationCreatorForm extends StatelessWidget {
                   locationSetup(tmp_name, tmp_theme, tmp_description,
                       tmp_imageUrl, tmp_locationUrl);
 
-                  Navigator.pop(context);
-                  Navigator.pop(context);
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => MyScreen()));
                 }
               },
